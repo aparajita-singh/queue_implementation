@@ -18,15 +18,10 @@ The main thread invokes the queue processor which reads the input file, parses t
 
 received 2 input arguments: {'filename': 'src/data/input.csv', 'start_time': '2017/02/10 04:59'}
 {'2017/02/10 05:01': ['Task_#501'], '2017/02/10 05:00': ['Task_#502', 'Task_#500']}
-
 sleeping 1 minute
-
 Current time [ 2017/02/10 05:00 ] , Event "Task_#502" Processed
-
 Current time [ 2017/02/10 05:00 ] , Event "Task_#500" Processed
-
 sleeping 1 minute
-
 Current time [ 2017/02/10 05:01 ] , Event "Task_#501" Processed
 </code></pre>
 
@@ -35,12 +30,8 @@ Current time [ 2017/02/10 05:01 ] , Event "Task_#501" Processed
 <pre><code>$ python3 -u -m src src/data/input.csv "2017/12/10 6:00"
 
 received 2 input arguments: {'filename': 'src/data/input.csv', 'start_time': '2017/02/10 05:59'}
-
 {'2017/02/10 05:59': ['Task_#502', 'Task_#500', 'Task_#501']}
-
 Current time [ 2017/02/10 05:59 ] , Event "Task_#502" Processed
-
 Current time [ 2017/02/10 05:59 ] , Event "Task_#500" Processed
-
 Current time [ 2017/02/10 05:59 ] , Event "Task_#501" Processed
 </code></pre>
