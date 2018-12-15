@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta as timedelta
 
 TIME_FORMAT = '%Y/%m/%d %H:%M'
 
@@ -13,3 +13,8 @@ def dequotify(value):
 
 def get_date(time_string):
     return datetime.strptime(time_string, TIME_FORMAT)
+
+
+def increment_time_by_minutes(time, minutes):
+    return datetime.strftime(
+            datetime.strptime(time, '%Y/%m/%d %H:%M') + timedelta(minutes=minutes), '%Y/%m/%d %H:%M')

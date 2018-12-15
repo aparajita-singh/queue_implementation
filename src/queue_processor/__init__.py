@@ -1,8 +1,5 @@
-from src.dao import file_dao
-from datetime import datetime as datetime
-from datetime import timedelta as timedelta
+from src import utils, file_dao, logger
 import time
-from src import utils
 
 
 def convert_csv_row_to_dict(row, all_tasks, start_time):
@@ -17,7 +14,7 @@ def convert_csv_row_to_dict(row, all_tasks, start_time):
 
 
 def do_task(start_time, task):
-    print('Current time [ {0} ] , Event "{1}" Processed'
+    logger.log('Current time [ {0} ] , Event "{1}" Processed'
           .format(start_time, task))
 
 
@@ -26,15 +23,16 @@ def process_one_task_group(input_tasks):
 
 
 def process(input_args):
-    print('received {} input arguments: {}'.format(len(input_args), input_args))
-    input_args['input_data'] = file_dao.read_csv_file_as_custom_dict(input_args['filename'], convert_csv_row_to_dict, input_args['start_time'])
-    print(input_args['input_data'])
+    logger.log('received {} input arguments: {}'.format(len(input_args), input_args))
+    input_args['input_data'] = file_dao.read_csv_file_as_custom_dict(input_args['filename'], convert_csv_row_to_dict,
+                                                                     input_args['start_time'])
+    logger.log(input_args['input_data'])
 
     while True:
         process_one_task_group(input_args) if input_args['start_time'] in input_args['input_data'] else None
         input_args['input_data'].pop(input_args['start_time'], None)
-        input_args['start_time'] = str(datetime.strftime(
-            datetime.strptime(input_args['start_time'], '%Y/%m/%d %H:%M') + timedelta(minutes=1), '%Y/%m/%d %H:%M'))
+        input_args['start_time'] = str(utils.increment_time_by_minutes(input_args['start_time'], 1))
         if len(input_args['input_data']) <= 0:
             break
+        logger.log('sleeping 1 minute')
         time.sleep(60)

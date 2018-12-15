@@ -1,4 +1,4 @@
-from src.dao import file_dao as file_dao
+from src.file_dao import __init__ as file_dao
 
 
 def do_nothing(x=None, y=None):

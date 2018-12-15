@@ -1,8 +1,7 @@
 # this is the starting point for the program
 import sys
 
-from src import utils, queue_processor
-import shlex
+from src import utils, queue_processor, logger
 
 
 def get_input(input_args):
@@ -15,6 +14,6 @@ def get_input(input_args):
 if __name__ == '__main__':
     input_dict = get_input(sys.argv)
     if input_dict is None:
-        print('Provide 2 input arguments in this format: <input-file-name> <start-time>')
+        logger.log('Provide 2 input arguments in this format: <input-file-name> <start-time>')
     else:
         queue_processor.process(input_dict)
